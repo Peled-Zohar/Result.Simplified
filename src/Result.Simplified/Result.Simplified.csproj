@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>2.0.0</Version>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>‏‏README-Nuget.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Peled-Zohar/Result.Simplified</RepositoryUrl>
+    <PackageTags>Result pattern, .NET, .netstandard2.0, .net8.0</PackageTags>
+    <Authors>Zohar Peled</Authors>
+    <Company />
+    <Copyright>Zohar Peled</Copyright>
+    <PackageIcon>Result.Simplified.png</PackageIcon>
+    <PackageId>Result.Simplified</PackageId>
+    <Title>A Simple yet powerful implementation of the result pattern</Title>
+    <PackageReleaseNotes>Renamed project and adjusted namespaces to match nuget package id</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\Result.Simplified.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\‏‏README-Nuget.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>false</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+</ItemGroup>
+
+</Project>
