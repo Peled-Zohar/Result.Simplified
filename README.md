@@ -5,8 +5,8 @@
 [![Build Status](https://dev.azure.com/adamkarlsson/Result.Simplified/_apis/build/status/adamkarlsson.Result.Simplified?branchName=master)](https://dev.azure.com/adamkarlsson/Result.Simplified/_build/latest?definitionId=1&branchName=master)
 [![Code Coverage](https://codecov.io/gh/adamkarlsson/Result.Simplified/branch/master/graph/badge.svg)](https://codecov.io/gh/adamkarlsson/Result.Simplified)
 -->
-[![NuGet](https://img.shields.io/nuget/v/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified)
-[![NuGet](https://img.shields.io/nuget/dt/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified)
+[![NuGet version](https://img.shields.io/nuget/v/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified)
 
 
 **Result.Simplified** enables dot net methods to return an indication of success or failure, for any method return type (including void).
