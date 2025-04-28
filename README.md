@@ -1,6 +1,6 @@
 # Result.Simplified
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
-[![Build Status](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)  
+[![Build Status](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg) 
 [![codecov](https://codecov.io/gh/Peled-Zohar/Result.Simplified/graph/badge.svg?token=BLASRCXG68)](https://codecov.io/gh/Peled-Zohar/Result.Simplified)  
 [![NuGet version](https://img.shields.io/nuget/v/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified) 
 [![NuGet downloads](https://img.shields.io/nuget/dt/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified)
