@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace Result.Simplified.Tests;
 
@@ -21,6 +22,31 @@ class ResultAndUnitTests
     }
 
     #region & operator
+
+    [Test]
+    public void AndOperator_NullAndSuccess_Throws()
+    {
+        Assert.Throws<ArgumentNullException>(() => { var result = null & _success1; });
+    }
+
+    [Test]
+    public void AndOperator_NullAndFail_Throws()
+    {
+        Assert.Throws<ArgumentNullException>(() => { var result = null & _fail1; });
+    }
+
+    [Test]
+    public void AndOperator_SuccessAndNull_Throws()
+    {
+        Assert.Throws<ArgumentNullException>(() => { var result = _success1 & null; });
+    }
+
+    [Test]
+    public void AndOperator_FailAndNull_Throws()
+    {
+        Assert.Throws<ArgumentNullException>(() => { var result = _fail1 & null; });
+    }
+
 
     [Test]
     public void AndOperator_failAndSuccess()

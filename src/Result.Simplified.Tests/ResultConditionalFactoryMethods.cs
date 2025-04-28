@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 
 namespace Result.Simplified.Tests;
@@ -11,45 +12,71 @@ class ResultConditionalFactoryMethods
     {
         var result = Result.SuccessIf(() => true, "failed");
         Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.ErrorDescription is null, "error description should be null", null);
     }
 
     [Test]
-    public void Result_SuccessIf_PredicateIsFalseReturnFaile()
+    public void Result_SuccessIf_PredicateIsTrueErrorDescriptionIsNull()
+    {
+        var result = Result.SuccessIf(() => true, "failed");
+        Assert.That(result.ErrorDescription, Is.Null);
+    }
+
+    [Test]
+    public void Result_SuccessIf_PredicateIsFalseReturnFail()
     {
         const string errorDescription = "failed";
         var result = Result.SuccessIf(() => false, errorDescription);
         Assert.That(result.IsSuccess, Is.False);
-        Assert.That(result.ErrorDescription == errorDescription, $"error description should be {errorDescription}", errorDescription);
     }
 
-    [TestCase(true)]
-    [TestCase(false)]
-    public void ResultOfT_SuccessIf_PredicateIsTrueReturnSuccess(bool includeValue)
+    [Test]
+    public void Result_SuccessIf_PredicateIsFalseReturnCorrectErrorMessage()
     {
-        const int value = 5;
-        var result = Result<int>.SuccessIf(x => x == value, value, "failed", includeValue);
-        Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.Value == value, $"result's value should be {value}");
-        Assert.That(result.ErrorDescription is null, "error description should be null", null);
-    }
-
-    [TestCase(true)]
-    [TestCase(false)]
-    public void ResultOfT_SuccessIf_PredicateIsFalseReturnFail(bool includeValue)
-    {
-        const int value = 5;
         const string errorDescription = "failed";
-        var result = Result<int>.SuccessIf(x => x != value, value, errorDescription, includeValue);
-        Assert.That(result.IsSuccess, Is.False);
-        if(includeValue)
-        {
-            Assert.That(result.Value == value, $"result's value should be {value}");
-        }
-        else
-        {
-            Assert.That(result.Value == default, "result's value should be default");
-        }
-        Assert.That(result.ErrorDescription == errorDescription, $"error description should be {errorDescription}", errorDescription);
+        var result = Result.SuccessIf(() => false, errorDescription);
+        Assert.That(result.ErrorDescription, Is.EqualTo(errorDescription));
     }
+
+    [Test]
+    public void Result_SuccessIf_PredicateIsNull_Throws()
+    {
+        Assert.Throws<ArgumentNullException>(() => Result.SuccessIf(null, "failed"));
+    }
+
+    [Test]
+    public void Result_FailIf_PredicateIsFalseReturnSuccess()
+    {
+        var result = Result.FailIf(() => false, "failed");
+        Assert.That(result.IsSuccess, Is.True);
+    }
+
+    [Test]
+    public void Result_FailIf_PredicateIsFalseErrorDescriptionIsNull()
+    {
+        var result = Result.FailIf(() => false, "failed");
+        Assert.That(result.ErrorDescription, Is.Null);
+    }
+
+    [Test]
+    public void Result_FailIf_PredicateIsTrueReturnFail()
+    {
+        const string errorDescription = "failed";
+        var result = Result.FailIf(() => true, errorDescription);
+        Assert.That(result.IsSuccess, Is.False);
+    }
+
+    [Test]
+    public void Result_FailIf_PredicateIsTrueReturnCorrectErrorMessage()
+    {
+        const string errorDescription = "failed";
+        var result = Result.FailIf(() => true, errorDescription);
+        Assert.That(result.ErrorDescription, Is.EqualTo(errorDescription));
+    }
+
+    [Test]
+    public void Result_FailIf_PredicateIsNull_Throws()
+    {
+        Assert.Throws<ArgumentNullException>(() => Result.FailIf(null, "failed"));
+    }
+
 }
