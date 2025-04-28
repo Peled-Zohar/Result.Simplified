@@ -6,7 +6,7 @@ namespace Result.Simplified.Tests;
 class ResultOfTAndUnitTests
 {
     private Result _fail1, _fail2, _fail3,
-_success1, _success2, _success3;
+        _success1, _success2, _success3;
 
     [SetUp]
     public void Setup()
@@ -80,6 +80,16 @@ _success1, _success2, _success3;
     public void AndOperator_failAndFail()
     {
         var result = _fail1 & _fail2;
+        Assert.That(!ReferenceEquals(result, _fail2));
+        Assert.That(ReferenceEquals(result, _fail1));
+        Assert.That(!result.IsSuccess);
+    }
+
+    [Test]
+    public void AndOperator_failAndFailAndFail()
+    {
+        var result = _fail1 & _fail2 & _fail3;
+        Assert.That(!ReferenceEquals(result, _fail3));
         Assert.That(!ReferenceEquals(result, _fail2));
         Assert.That(ReferenceEquals(result, _fail1));
         Assert.That(!result.IsSuccess);
