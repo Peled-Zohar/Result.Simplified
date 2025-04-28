@@ -5,7 +5,7 @@ namespace Result.Simplified.Tests;
 
 class ResultOfTAndUnitTests
 {
-    private Result _fail1, _fail2, _fail3,
+    private Result<int> _fail1, _fail2, _fail3,
         _success1, _success2, _success3;
 
     [SetUp]
