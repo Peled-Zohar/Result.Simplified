@@ -48,7 +48,7 @@ public class ResultOfTConditionalFactoryMethods
 
     [TestCase(true)]
     [TestCase(false)]
-    public void FailIf_PredicateIsfalse_ReturnSuccess(bool includeValue)
+    public void FailIf_PredicateIsFalse_ReturnSuccess(bool includeValue)
     {
 
         var result = Result<int>.FailIf(x => x != value, value, errorDescription, includeValue);
