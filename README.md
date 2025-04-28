@@ -1,5 +1,5 @@
 # Result.Simplified
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Build Status](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)
 <!--
 [![Code Coverage](https://codecov.io/gh/adamkarlsson/Result.Simplified/branch/master/graph/badge.svg)](https://codecov.io/gh/adamkarlsson/Result.Simplified)
