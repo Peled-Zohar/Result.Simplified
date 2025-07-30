@@ -4,14 +4,14 @@ namespace Result.Simplified.Tests;
 
 class ResultBooleanOperatorUnitTests
 {
-    private Result _fail, _success;
+    private VoidResult _fail, _success;
     private Result<int> _failOfT, _successOfT;
 
     [SetUp]
     public void Setup()
     {
-        _fail = Result.Fail("fail");
-        _success = Result.Success();
+        _fail = VoidResult.Fail("fail");
+        _success = VoidResult.Success();
         _failOfT = Result<int>.Fail("fail");
         _successOfT = Result<int>.Success(1);
     }

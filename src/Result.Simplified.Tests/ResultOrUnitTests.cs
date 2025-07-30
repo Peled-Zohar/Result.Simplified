@@ -6,19 +6,19 @@ namespace Result.Simplified.Tests;
 class ResultOrUnitTests
 {
 
-    private Result _fail1, _fail2, _fail3,
+    private VoidResult _fail1, _fail2, _fail3,
         _success1, _success2, _success3;
 
     [SetUp]
     public void Setup()
     {
-        _fail1 = Result.Fail("Fail 1");
-        _fail2 = Result.Fail("Fail 2");
-        _fail3 = Result.Fail("Fail 3");
+        _fail1 = VoidResult.Fail("Fail 1");
+        _fail2 = VoidResult.Fail("Fail 2");
+        _fail3 = VoidResult.Fail("Fail 3");
 
-        _success1 = Result.Success();
-        _success2 = Result.Success();
-        _success3 = Result.Success();
+        _success1 = VoidResult.Success();
+        _success2 = VoidResult.Success();
+        _success3 = VoidResult.Success();
     }
 
     #region | operator

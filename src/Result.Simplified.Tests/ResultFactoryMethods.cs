@@ -9,46 +9,46 @@ class ResultFactoryMethods
     [Test]
     public void ResultFail_ValidErrorDescription_GeneratesAFailedResult()
     {
-        var result = Result.Fail(errorDescription);
+        var result = VoidResult.Fail(errorDescription);
         Assert.That(result.IsSuccess, Is.False);
     }
 
     [Test]
     public void ResultFail_ValidErrorDescription_GeneratesCorrectErrorMessage()
     {
-        var result = Result.Fail(errorDescription);
+        var result = VoidResult.Fail(errorDescription);
         Assert.That(result.ErrorDescription, Is.EqualTo(errorDescription));
     }
 
     [Test]
     public void ResultFail_NullErrorDescription_ThrowsArgumentNullException()
     {
-        Assert.Throws<ArgumentNullException>(() => Result.Fail(null));        
+        Assert.Throws<ArgumentNullException>(() => VoidResult.Fail(null));        
     }
 
     [Test]
     public void ResultFail_EmptyErrorDescription_ThrowsArgumentException()
     {
-        Assert.Throws<ArgumentException>(() => Result.Fail(""));
+        Assert.Throws<ArgumentException>(() => VoidResult.Fail(""));
     }
 
     [Test]
     public void ResultFail_WhitespaceErrorDescription_ThrowsArgumentException()
     {
-        Assert.Throws<ArgumentException>(() => Result.Fail(" "));
+        Assert.Throws<ArgumentException>(() => VoidResult.Fail(" "));
     }
 
     [Test]
     public void ResultSuccess_GeneratesASuccessfulResult()
     {
-        var result = Result.Success();
+        var result = VoidResult.Success();
         Assert.That(result.IsSuccess, Is.True);
     }
 
     [Test]
     public void ResultSuccess_GeneratesAResultWithNullErrorDescription()
     {
-        var result = Result.Success();
+        var result = VoidResult.Success();
         Assert.That(result.ErrorDescription, Is.Null);
     }
 }

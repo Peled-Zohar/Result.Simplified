@@ -286,7 +286,7 @@ class ResultOfTAndUnitTests
         Assert.That(ReferenceEquals(result, _fail1));
         Assert.That(!result.IsSuccess);
 
-        Result GetResult(Result input)
+        VoidResult GetResult(VoidResult input)
         {
             return input;
         }

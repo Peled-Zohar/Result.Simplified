@@ -10,7 +10,7 @@ namespace Result.Simplified;
 /// and the <c>|</c> operator returns the first successful  operand (or the last operand tested).
 /// The <c>&amp;&amp;</c> operator and <c>||</c> operators will do the same, but in a short-circuit way.
 /// </summary>
-public class Result<T> : Result
+public class Result<T> : VoidResult
 {
     #region ctor
 

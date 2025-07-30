@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>2.1.0</Version>
+    <Version>2.2.0</Version>
     <LangVersion>latest</LangVersion>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -15,8 +15,10 @@
     <PackageIcon>Result.Simplified.png</PackageIcon>
     <PackageId>Result.Simplified</PackageId>
     <Title>A Simple yet powerful implementation of the result pattern</Title>
-    <PackageReleaseNotes>Added input validations.
-Improved XML documentation.</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      1. Added the VoidResult class.
+      2. Marked the Result class as obsolete, the VoidResult class will replace it.
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
