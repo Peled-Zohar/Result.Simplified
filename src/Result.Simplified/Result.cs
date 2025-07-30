@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Result.Simplified;
 
 /// <summary>
 /// Deprecated. Use <see cref="VoidResult"/> instead.
 /// </summary>
+[ExcludeFromCodeCoverage] // There's no need to test it anymore, it's obsolte
 [Obsolete("Result has been renamed to VoidResult to avoid namespace/type conflicts. Please use VoidResult instead. This class will be removed in a future version.")]
 public class Result
 {
