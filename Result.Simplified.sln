@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Result.Simplified", "src\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Result.Simplified.Tests", "src\Result.Simplified.Tests\Result.Simplified.Tests.csproj", "{3F53D9A1-418B-48FB-9CE8-E37FDE338E36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Result.Simplified.Extensions", "src\‏‏Result.Simplified.Extensions\Result.Simplified.Extensions.csproj", "{C917C328-AA31-687E-1BF2-3EC310F189FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3F53D9A1-418B-48FB-9CE8-E37FDE338E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F53D9A1-418B-48FB-9CE8-E37FDE338E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F53D9A1-418B-48FB-9CE8-E37FDE338E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C917C328-AA31-687E-1BF2-3EC310F189FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C917C328-AA31-687E-1BF2-3EC310F189FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C917C328-AA31-687E-1BF2-3EC310F189FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C917C328-AA31-687E-1BF2-3EC310F189FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
