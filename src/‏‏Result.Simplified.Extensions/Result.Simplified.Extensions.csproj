@@ -37,8 +37,4 @@
     </None>
 </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Result.Simplified\Result.Simplified.csproj" />
-  </ItemGroup>
-
 </Project>
