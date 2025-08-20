@@ -16,8 +16,7 @@
     <PackageId>Result.Simplified</PackageId>
     <Title>A Simple yet powerful implementation of the result pattern</Title>
     <PackageReleaseNotes>
-      1. Added the VoidResult class.
-      2. Marked the Result class as obsolete, the VoidResult class will replace it.
+      1. Added new factory methods to VoidResult and Result&lt;T&gt; classes for easier creation of results.
     </PackageReleaseNotes>
   </PropertyGroup>
 

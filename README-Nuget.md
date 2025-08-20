@@ -1,13 +1,9 @@
 # Result.Simplified
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Build Status](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)
-<!--
-[![Code Coverage](https://codecov.io/gh/adamkarlsson/Result.Simplified/branch/master/graph/badge.svg)](https://codecov.io/gh/adamkarlsson/Result.Simplified)
-
-### Now available on nuget.org
-[![NuGet](https://img.shields.io/nuget/v/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified)
-[![NuGet](https://img.shields.io/nuget/dt/Result.Simplified.svg)](https://www.nuget.org/packages/Result.Simplified)
--->
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
+[![Build Status](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Peled-Zohar/Result.Simplified/actions/workflows/dotnet.yml/badge.svg) 
+[![codecov](https://codecov.io/gh/Peled-Zohar/Result.Simplified/graph/badge.svg)](https://codecov.io/gh/Peled-Zohar/Result.Simplified)  
+[![.NET 8.0](https://img.shields.io/badge/.NET-8.0-blueviolet.svg)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+[![.NET Standard 2.0](https://img.shields.io/badge/.NETStandard-2.0-blueviolet.svg)](https://learn.microsoft.com/en-us/dotnet/standard/net-standard)
 
 **Result.Simplified** enables dot net methods to return an indication of success or failure, for any method return type (including void).
 It shouldn't be used instead of exceptions, but rather to enable a method to return a failure indication in non-exceptional circumstances.
