@@ -22,6 +22,35 @@ public class VoidResult
         => new();
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="VoidResult"/> class based on the <paramref name="predicate"/>.
+    /// This overload evaluates the <paramref name="predicate"/> lazily.
+    /// </summary>
+    /// <param name="predicate">A condition to evaluate.</param>
+    /// <param name="errorDescription">Description of the error in case <paramref name="predicate"/> evaluates to <c>false</c>.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="predicate"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="predicate"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="predicate"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
+    /// <returns>An instance of the <see cref="VoidResult"/> class indicating success if <paramref name="predicate"/> evaluates to <c>true</c>, otherwise, an instance indicating failure.</returns>
+    public static VoidResult SuccessIf(Func<bool> predicate, string errorDescription)
+        => predicate?.Invoke() ?? throw new ArgumentNullException(nameof(predicate))
+        ? Success()
+        : Fail(errorDescription);
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="VoidResult"/> class based on the <paramref name="expression"/>.
+    /// This overload evaluates the <paramref name="expression"/> immediately.
+    /// </summary>
+    /// <param name="expression">A boolean expression to evaluate.</param>
+    /// <param name="errorDescription">Description of the error in case <paramref name="expression"/> evaluates to <c>false</c>.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="expression"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="expression"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
+    /// <returns>An instance of the <see cref="VoidResult"/> class indicating success if <paramref name="expression"/> evaluates to <c>true</c>, otherwise, an instance indicating failure.</returns>
+    public static VoidResult SuccessIf(bool expression, string errorDescription)
+        => expression
+        ? Success()
+        : Fail(errorDescription);
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="VoidResult"/> class to indicate a failure.
     /// </summary>
     /// <param name="errorDescription">Description of the error.</param>
@@ -32,30 +61,31 @@ public class VoidResult
         => new(errorDescription);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="VoidResult"/> class based on the <paramref name="predicate"/>.
-    /// </summary>
-    /// <param name="predicate">A condition to evaluate.</param>
-    /// <param name="errorDescription">Description of the error in case <paramref name="predicate"/> evaluates to <c>false</c>.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="predicate"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="predicate"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="predicate"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
-    /// <returns>An instance of the <see cref="VoidResult"/> class indicating success if <paramref name="predicate"/> evaluates to <c>true</c>, otherwise fail.</returns>
-    public static VoidResult SuccessIf(Func<bool> predicate, string errorDescription)
-        => predicate?.Invoke() ?? throw new ArgumentNullException(nameof(predicate))
-        ? Success()
-        : Fail(errorDescription);
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="VoidResult"/> class based on the <paramref name="negativePredicate"/>.
+    /// This overload evaluates the <paramref name="negativePredicate"/> lazily.
     /// </summary>
     /// <param name="negativePredicate">A condition to evaluate.</param>
     /// <param name="errorDescription">Description of the error in case <paramref name="negativePredicate"/> evaluates to <c>true</c>.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="negativePredicate"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="negativePredicate"/> evaluates to <c>true</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentException">Thrown when <paramref name="negativePredicate"/> evaluates to <c>true</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
-    /// <returns>An instance of the <see cref="VoidResult"/> class indicating fail if <paramref name="negativePredicate"/> evaluates to <c>true</c>, otherwise success.</returns>
+    /// <returns>An instance of the <see cref="VoidResult"/> class indicating fail if <paramref name="negativePredicate"/> evaluates to <c>true</c>, otherwise, an instance indicating success.</returns>
     public static VoidResult FailIf(Func<bool> negativePredicate, string errorDescription)
         => negativePredicate?.Invoke() ?? throw new ArgumentNullException(nameof(negativePredicate))
+        ? Fail(errorDescription)
+        : Success();
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="VoidResult"/> class based on the <paramref name="negativeExpression"/>.
+    /// This overload evaluates the <paramref name="negativeExpression"/> immediately.
+    /// </summary>
+    /// <param name="negativeExpression">A condition to evaluate.</param>
+    /// <param name="errorDescription">Description of the error in case <paramref name="negativeExpression"/> evaluates to <c>true</c>.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="negativeExpression"/> evaluates to <c>true</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="negativeExpression"/> evaluates to <c>true</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
+    /// <returns>An instance of the <see cref="VoidResult"/> class indicating fail if <paramref name="negativeExpression"/> evaluates to <c>true</c>, otherwise, an instance indicating success.</returns>
+    public static VoidResult FailIf(bool negativeExpression, string errorDescription)
+        => negativeExpression
         ? Fail(errorDescription)
         : Success();
 
@@ -73,11 +103,15 @@ public class VoidResult
     /// <exception cref="ArgumentException">Thrown when <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
     protected VoidResult(string errorDescription)
     {
-        if (errorDescription == null)
+        if (errorDescription is null)
+        {
             throw new ArgumentNullException(nameof(errorDescription));
+        }
 
         if (string.IsNullOrWhiteSpace(errorDescription))
+        {
             throw new ArgumentException("Error description cannot be empty.", nameof(errorDescription));
+        }
 
         IsSuccess = false;
         ErrorDescription = errorDescription;
@@ -122,8 +156,15 @@ public class VoidResult
     /// <exception cref="ArgumentNullException">If any of the operands are null.</exception>
     public static VoidResult operator &(VoidResult self, VoidResult other)
     {
-        if (self is null) throw new ArgumentNullException(nameof(self));
-        if (other is null) throw new ArgumentNullException(nameof(other));
+        if (self is null)
+        {
+            throw new ArgumentNullException(nameof(self));
+        }
+
+        if (other is null)
+        {
+            throw new ArgumentNullException(nameof(other));
+        }
 
         return self.IsSuccess ? other : self;
     }
@@ -149,8 +190,15 @@ public class VoidResult
     /// <exception cref="ArgumentNullException">If any of the operands are null.</exception>
     public static VoidResult operator |(VoidResult self, VoidResult other)
     {
-        if (self is null) throw new ArgumentNullException(nameof(self));
-        if (other is null) throw new ArgumentNullException(nameof(other));
+        if (self is null)
+        {
+            throw new ArgumentNullException(nameof(self));
+        }
+        if (other is null)
+        {
+            throw new ArgumentNullException(nameof(other));
+        }
+
         return self.IsSuccess ? self : other;
     }
 

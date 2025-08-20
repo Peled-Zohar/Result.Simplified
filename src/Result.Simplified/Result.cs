@@ -7,7 +7,7 @@ namespace Result.Simplified;
 /// Deprecated. Use <see cref="VoidResult"/> instead.
 /// </summary>
 [ExcludeFromCodeCoverage] // There's no need to test it anymore, it's obsolte
-[Obsolete("Result has been renamed to VoidResult to avoid namespace/type conflicts. Please use VoidResult instead. This class will be removed in a future version.")]
+[Obsolete("Use VoidResult instead. Result will be removed in in v3.0.0, no sooner than 2026-01-01.")]
 public class Result
 {
     #region ctor

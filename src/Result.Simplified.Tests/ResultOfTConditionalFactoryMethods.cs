@@ -21,9 +21,37 @@ public class ResultOfTConditionalFactoryMethods
 
     [TestCase(true)]
     [TestCase(false)]
+    public void SuccessIf_ExpressionIsTrue_ReturnSuccess(bool includeValue)
+    {
+
+        var result = Result<int>.SuccessIf(1 == 1, value, errorDescription, includeValue);
+        Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.EqualTo(value));
+        Assert.That(result.ErrorDescription, Is.Null);
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
     public void SuccessIf_PredicateIsFalse_ReturnFail(bool includeValue)
     {
         var result = Result<int>.SuccessIf(x => x != value, value, errorDescription, includeValue);
+        Assert.That(result.IsSuccess, Is.False);
+        if (includeValue)
+        {
+            Assert.That(result.Value, Is.EqualTo(value));
+        }
+        else
+        {
+            Assert.That(result.Value, Is.EqualTo(default(int)));
+        }
+        Assert.That(result.ErrorDescription, Is.EqualTo(errorDescription));
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
+    public void SuccessIf_ExpressionIsFalse_ReturnFail(bool includeValue)
+    {
+        var result = Result<int>.SuccessIf(1 == 2, value, errorDescription, includeValue);
         Assert.That(result.IsSuccess, Is.False);
         if (includeValue)
         {
@@ -59,9 +87,37 @@ public class ResultOfTConditionalFactoryMethods
 
     [TestCase(true)]
     [TestCase(false)]
+    public void FailIf_ExpressionIsFalse_ReturnSuccess(bool includeValue)
+    {
+
+        var result = Result<int>.FailIf(1 == 2, value, errorDescription, includeValue);
+        Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.EqualTo(value));
+        Assert.That(result.ErrorDescription, Is.Null);
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
     public void FailIf_PredicateIsTrue_ReturnFail(bool includeValue)
     {
         var result = Result<int>.FailIf(x => x == value, value, errorDescription, includeValue);
+        Assert.That(result.IsSuccess, Is.False);
+        if (includeValue)
+        {
+            Assert.That(result.Value, Is.EqualTo(value));
+        }
+        else
+        {
+            Assert.That(result.Value, Is.EqualTo(default(int)));
+        }
+        Assert.That(result.ErrorDescription, Is.EqualTo(errorDescription));
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
+    public void FailIf_ExpressioneIsTrue_ReturnFail(bool includeValue)
+    {
+        var result = Result<int>.FailIf(1 == 1, value, errorDescription, includeValue);
         Assert.That(result.IsSuccess, Is.False);
         if (includeValue)
         {

@@ -23,7 +23,8 @@ public class Result<T> : VoidResult
         => new(value);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Result{T}"/> class based on the predicate.
+    /// Initializes a new instance of the <see cref="Result{T}"/> class based on the <paramref name="predicate"/>.
+    /// This overload evaluates the <paramref name="predicate"/> lazily.
     /// </summary>
     /// <param name="predicate">A condition to evaluate.</param>
     /// <param name="value">The value to return from the method.</param>
@@ -32,9 +33,25 @@ public class Result<T> : VoidResult
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="predicate"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="predicate"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentException">Thrown when <paramref name="predicate"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
-    /// <returns>A new instance of the <see cref="Result{T}"/> class indicating success if <paramref name="predicate"/> evaluates to <c>true</c>, or failure otherwise.</returns>
+    /// <returns>A new instance of the <see cref="Result{T}"/> class indicating success if <paramref name="predicate"/> evaluates to <c>true</c>, otherwise, an instance indicating failure.</returns>
     public static Result<T> SuccessIf(Predicate<T> predicate, T value, string errorDescription, bool includeValueInFailResult = false)
         => predicate?.Invoke(value) ?? throw new ArgumentNullException(nameof(predicate))
+        ? Success(value)
+        : Fail(errorDescription, includeValueInFailResult ? value : default);
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Result{T}"/> class based on the <paramref name="predicate"/>.
+    /// This overload evaluates the <paramref name="expression"/> immediately.
+    /// </summary>
+    /// <param name="expression">A boolean expression to evaluate.</param>
+    /// <param name="value">The value to return from the method.</param>
+    /// <param name="errorDescription">An error description in case <paramref name="expression"/> evaluates to <c>false</c></param>
+    /// <param name="includeValueInFailResult">An optional <see cref="bool"/> value indicating whether to include value in failed result. default is <c>false</c>.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="expression"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="expression"/> evaluates to <c>false</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
+    /// <returns>A new instance of the <see cref="Result{T}"/> class indicating success if <paramref name="expression"/> evaluates to <c>true</c>, otherwise, an instance indicating failure.</returns>
+    public static Result<T> SuccessIf(bool expression, T value, string errorDescription, bool includeValueInFailResult = false)
+        => expression
         ? Success(value)
         : Fail(errorDescription, includeValueInFailResult ? value : default);
 
@@ -61,7 +78,8 @@ public class Result<T> : VoidResult
         => new(errorDescription, value);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Result{T}"/> class based on the negativePredicate.
+    /// Initializes a new instance of the <see cref="Result{T}"/> class based on the <paramref name="negativePredicate"/>.
+    /// This overload evaluates the <paramref name="negativePredicate"/> lazily.
     /// </summary>
     /// <param name="negativePredicate">A condition to evaluate.</param>
     /// <param name="value">The value to return from the method.</param>
@@ -73,6 +91,23 @@ public class Result<T> : VoidResult
     /// <returns>A new instance of the <see cref="Result{T}"/> class indicating success if <paramref name="predicate"/> evaluates to <c>false</c>, or failure otherwise.</returns>
     public static Result<T> FailIf(Predicate<T> negativePredicate, T value, string errorDescription, bool includeValueInFailResult = false)
         => negativePredicate?.Invoke(value) ?? throw new ArgumentNullException(nameof(negativePredicate))
+        ? Fail(errorDescription, includeValueInFailResult ? value : default)
+        : Success(value);
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Result{T}"/> class based on the <paramref name="negativeExpression"/>.
+    /// This overload evaluates the <paramref name="expression"/> immediately.
+    /// </summary>
+    /// <param name="negativeExpression">A condition to evaluate.</param>
+    /// <param name="value">The value to return from the method.</param>
+    /// <param name="errorDescription">An error description in case <paramref name="negativeExpression"/> evaluates to <c>false</c></param>
+    /// <param name="includeValueInFailResult">An optional <see cref="bool"/> value indicating whether to include value in failed result. Default is <c>false</c>.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="negativeExpression"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="negativeExpression"/> evaluates to <c>true</c> and <paramref name="errorDescription"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="negativeExpression"/> evaluates to <c>true</c> and <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
+    /// <returns>A new instance of the <see cref="Result{T}"/> class indicating success if <paramref name="predicate"/> evaluates to <c>false</c>, or failure otherwise.</returns>
+    public static Result<T> FailIf(bool negativeExpression, T value, string errorDescription, bool includeValueInFailResult = false)
+        => negativeExpression
         ? Fail(errorDescription, includeValueInFailResult ? value : default)
         : Success(value);
 
@@ -91,7 +126,6 @@ public class Result<T> : VoidResult
     /// <param name="value">The value to return from the method.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="errorDescription"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentException">Thrown when <paramref name="errorDescription"/> is empty or contains only white spaces.</exception>
-
     protected Result(string errorDescription, T value) : base(errorDescription)
         => Value = value;
 
@@ -129,8 +163,15 @@ public class Result<T> : VoidResult
     /// <exception cref="ArgumentNullException">If any of the operands are null.</exception>
     public static Result<T> operator &(Result<T> self, Result<T> other)
     {
-        if (self is null) throw new ArgumentNullException(nameof(self));
-        if (other is null) throw new ArgumentNullException(nameof(other));
+        if (self is null)
+        {
+            throw new ArgumentNullException(nameof(self));
+        }
+
+        if (other is null)
+        {
+            throw new ArgumentNullException(nameof(other));
+        }
 
         return self.IsSuccess ? other : self;
     }
@@ -156,8 +197,16 @@ public class Result<T> : VoidResult
     /// <exception cref="ArgumentNullException">If any of the operands are null.</exception>
     public static Result<T> operator |(Result<T> self, Result<T> other)
     {
-        if (self is null) throw new ArgumentNullException(nameof(self));
-        if (other is null) throw new ArgumentNullException(nameof(other));
+        if (self is null)
+        {
+            throw new ArgumentNullException(nameof(self));
+        }
+
+        if (other is null)
+        {
+            throw new ArgumentNullException(nameof(other));
+        }
+
         return self.IsSuccess ? self : other;
     }
 
